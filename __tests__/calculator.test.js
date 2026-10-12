@@ -1,13 +1,19 @@
-import {add} from "../src/calculator.js";
+import {divide} from "../src/calculator.js";
 
-describe('add',()=>{
-    it('adds two positive numbers',()=>{
-        expect(add(2,3)).toBe(5);
+describe('divide',()=>{
+    it('divides two positive numbers',()=>{
+        expect(divide(2,4)).toBe(0.5);
     });
-    it('adds two negative numbers',()=>{
-        expect(add(-2,-3)).toBe(-5)
+    it('throws error when input is something other than a number',()=>{
+        expect(()=>divide('kaksi',3)).toThrow('Both arguments must be numbers');
     });
-    it('throws error when input is not a number',()=>{
-        expect(()=>add('kaksi',3)).toThrow('a or b is not a number.');
+    it('throws error when input is missing',()=>{
+        expect(()=>divide(2)).toThrow('Both arguments must be numbers');
+    });
+    it('throws error when input is NaN',()=>{
+        expect(()=>divide(2,NaN)).toThrow('Arguments cannot be NaN');
+    });
+    it('throws error when divisor is zero',()=>{
+        expect(()=>divide(2,0)).toThrow('Division by zero is not allowed');
     });
 });
